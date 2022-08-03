@@ -34,7 +34,7 @@ impl GameState {
     }
 
     pub fn clear(&mut self, render_engine: &mut RenderEngine, args: &RenderArgs) {
-        render_engine.engine.draw(args.viewport(), |c, gl| {
+        render_engine.engine.draw(args.viewport(), |_c, gl| {
             graphics::clear(GREEN, gl);
         });
     }
@@ -45,7 +45,7 @@ impl GameState {
         self.bean.render(render_engine, args);
     }
 
-    pub fn update(&mut self, args: &UpdateArgs) -> bool {
+    pub fn update(&mut self, _args: &UpdateArgs) -> bool {
         if !self.snake.update(self.just_eaten, self.cols, self.rows) {
             return false;
         }
