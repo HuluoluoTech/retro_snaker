@@ -3,12 +3,12 @@ use piston::input::Key;
 use piston::input::RenderArgs;
 use piston::input::UpdateArgs;
 
-use crate::direction::*;
-use crate::snaker::*;
 use crate::bean::*;
 use crate::config::*;
+use crate::direction::*;
 use crate::player::*;
 use crate::render_engine::*;
+use crate::snaker::*;
 
 pub struct GameState {
     pub rows: u32,

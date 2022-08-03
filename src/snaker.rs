@@ -1,8 +1,8 @@
-use std::collections::LinkedList;
 use piston::input::RenderArgs;
+use std::collections::LinkedList;
 
-use crate::direction::*;
 use crate::config::*;
+use crate::direction::*;
 use crate::render_engine::*;
 
 pub struct Snake {
@@ -24,15 +24,14 @@ impl Snake {
     }
 
     pub fn render(&mut self, render_engine: &mut RenderEngine, args: &RenderArgs) {
-        let squares: Vec<graphics::types::Rectangle> = self
-            .snake_parts
-            .iter()
-            .map(|p| SnakePiece(p.0 * self.width, p.1 * self.width))
-            .map(|p| graphics::rectangle::square(p.0 as f64, p.1 as f64, self.width as f64))
-            .collect();
-
         render_engine.engine.draw(args.viewport(), |c, gl| {
             let transform = c.transform;
+            let squares: Vec<graphics::types::Rectangle> = self
+                .snake_parts
+                .iter()
+                .map(|p| SnakePiece(p.0 * self.width, p.1 * self.width))
+                .map(|p| graphics::rectangle::square(p.0 as f64, p.1 as f64, self.width as f64))
+                .collect();
 
             squares
                 .into_iter()

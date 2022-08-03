@@ -1,5 +1,5 @@
-use opengl_graphics::GlGraphics;
 use crate::config::OPENGL_VERSION;
+use opengl_graphics::GlGraphics;
 
 trait Render {
     type Engine;

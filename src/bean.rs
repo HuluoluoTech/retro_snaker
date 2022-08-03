@@ -1,8 +1,8 @@
 use piston::input::RenderArgs;
 
 use crate::config::*;
-use crate::snaker::*;
 use crate::render_engine::*;
+use crate::snaker::*;
 
 pub struct Bean {
     pub x: u32,
@@ -27,10 +27,9 @@ impl Bean {
         let x = self.x * SQUARE_WIDTH;
         let y = self.y * SQUARE_WIDTH;
 
-        let square = graphics::rectangle::square(x as f64, y as f64, SQUARE_WIDTH as f64);
-
         render_engine.engine.draw(args.viewport(), |c, gl| {
             let transform = c.transform;
+            let square = graphics::rectangle::square(x as f64, y as f64, SQUARE_WIDTH as f64);
 
             graphics::rectangle(BLACK, square, transform, gl)
         });

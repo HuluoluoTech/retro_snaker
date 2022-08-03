@@ -1,4 +1,3 @@
-
 #[derive(Debug, Default)]
 pub struct Player {
     pub scores: u32,
