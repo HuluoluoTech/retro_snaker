@@ -29,7 +29,7 @@ fn setup_context() -> GlutinWindow {
 }
 
 fn r#loop(game: &mut GameState, window: &mut GlutinWindow) {
-    let mut events = Events::new(EventSettings::new()).ups(10);
+    let mut events = Events::new(EventSettings::new()).ups(3);
     let mut render_engine = RenderEngine::new();
     while let Some(e) = events.next(window) {
         if let Some(r) = e.render_args() {
