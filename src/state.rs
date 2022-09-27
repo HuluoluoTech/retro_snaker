@@ -1,7 +1,6 @@
-use piston::input::Button;
-use piston::input::Key;
-use piston::input::RenderArgs;
-use piston::input::UpdateArgs;
+use piston::input::*;
+use piston::event_loop::*;
+use glutin_window::GlutinWindow;
 
 use crate::bean::*;
 use crate::config::*;
@@ -84,4 +83,27 @@ impl GameState {
             _ => last_direction,
         };
     }
+
+    pub fn r#loop(&mut self, window: &mut GlutinWindow) {
+        let mut events = Events::new(EventSettings::new()).ups(3);
+        let mut render_engine = RenderEngine::new();
+        while let Some(e) = events.next(window) {
+            if let Some(k) = e.button_args() {
+                if k.state == ButtonState::Press {
+                    self.pressed(&k.button);
+                }
+            }
+
+            if let Some(u) = e.update_args() {
+                if !self.update(&u) {
+                    break;
+                }
+            }
+    
+            if let Some(r) = e.render_args() {
+                self.render(&mut render_engine, &r);
+            }
+        }
+    }
+
 }
