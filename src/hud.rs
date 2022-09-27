@@ -6,7 +6,7 @@ pub struct Hud {
     pub x: u32,
     pub y: u32,
     pub width: u32,
-    text: String,
+    pub text: String,
 }
 
 impl Hud {
@@ -14,7 +14,7 @@ impl Hud {
         Hud {
             x: 0u32,
             y: 0u32,
-            width: SQUARE_WIDTH * 5,
+            width: SQUARE_WIDTH,
             text: "0".to_owned(),
         }
     }

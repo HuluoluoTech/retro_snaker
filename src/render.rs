@@ -14,6 +14,7 @@ trait Render {
 
 pub struct RenderEngine {
     pub engine: GlGraphics,
+
 }
 
 impl RenderEngine {
@@ -58,6 +59,7 @@ impl RenderEngine {
             let transform = c.transform;
 
             let square = graphics::rectangle::square(hud.x as f64, hud.y as f64, hud.width as f64);
+            // graphics::text(RED, 5, &hud.text, &mut cache, transform, gl);
 
             graphics::rectangle(RED, square, transform, gl)
         });

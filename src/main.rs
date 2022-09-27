@@ -16,6 +16,7 @@ use state::*;
 
 fn main() {
     let mut context = context::setup();
+    
     let mut state = GameState::new();
 
     state.r#loop(&mut context);
