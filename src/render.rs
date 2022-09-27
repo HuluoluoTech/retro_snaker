@@ -32,13 +32,14 @@ impl RenderEngine {
             let transform = c.transform;
             let square = graphics::rectangle::square(x as f64, y as f64, SQUARE_WIDTH as f64);
 
-            graphics::rectangle(BLACK, square, transform, gl)
+            graphics::rectangle(RED, square, transform, gl)
         });
     }
 
     pub fn draw_snaker(&mut self, snake_parts: &LinkedList<SnakePiece>, width:u32, args: &RenderArgs) {
         self.engine.draw(args.viewport(), |c, gl| {
             let transform = c.transform;
+
             let squares: Vec<graphics::types::Rectangle> = snake_parts
                 .iter()
                 .map(|p| SnakePiece(p.0 * width, p.1 * width))

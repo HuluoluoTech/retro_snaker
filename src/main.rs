@@ -9,6 +9,7 @@ pub mod player;
 pub mod render;
 pub mod snaker;
 pub mod context;
+pub mod collision;
 
 use state::*;
 

@@ -29,8 +29,9 @@ impl Snake {
 
     pub fn update(&mut self, just_eaten: bool, cols: u32, rows: u32) -> bool {
         let mut new_front: SnakePiece =
-            (*self.snake_parts.front().expect("No front of snake found.")).clone();
-
+            (*self.snake_parts.front().expect("Empty!.")).clone();
+        
+        // Check edges
         if (self.d == Direction::UP && new_front.1 == 0)
             || (self.d == Direction::LEFT && new_front.0 == 0)
             || (self.d == Direction::DOWN && new_front.1 == rows - 1)
@@ -39,6 +40,7 @@ impl Snake {
             return false;
         }
 
+        // Update New front Postion
         match self.d {
             Direction::UP => new_front.1 -= 1,
             Direction::DOWN => new_front.1 += 1,
@@ -56,6 +58,7 @@ impl Snake {
         }
 
         self.snake_parts.push_front(new_front);
+        
         true
     }
 

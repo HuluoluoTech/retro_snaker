@@ -8,6 +8,7 @@ use crate::direction::*;
 use crate::player::*;
 use crate::render::*;
 use crate::snaker::*;
+use crate::collision;
 
 pub struct GameState {
     pub rows: u32,
@@ -44,17 +45,7 @@ impl GameState {
     }
 
     pub fn update(&mut self, _args: &UpdateArgs) -> bool {
-        if !self.snake.update(self.just_eaten, self.cols, self.rows) {
-            return false;
-        }
-
-        if self.just_eaten {
-            self.default_player.update(1);
-
-            self.just_eaten = false;
-        }
-
-        self.just_eaten = self.bean.update(&self.snake);
+        self.just_eaten = collision::can_eat_bean(&self.snake, &self.bean);
         if self.just_eaten {
             use rand::thread_rng;
             use rand::Rng;
@@ -68,6 +59,15 @@ impl GameState {
                     break;
                 }
             }
+        }
+
+        if !self.snake.update(self.just_eaten, self.cols, self.rows) {
+            return false;
+        }
+
+        if self.just_eaten {
+            self.default_player.add_score(1);
+            self.just_eaten = false;
         }
 
         true
