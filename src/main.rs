@@ -8,14 +8,14 @@ use piston::window::WindowSettings;
 pub mod bean;
 pub mod config;
 pub mod direction;
-pub mod game_state;
+pub mod state;
 pub mod player;
-pub mod render_engine;
+pub mod render;
 pub mod snaker;
 
 use config::*;
-use game_state::*;
-use render_engine::*;
+use state::*;
+use render::*;
 
 fn setup_context() -> GlutinWindow {
     match WindowSettings::new("RetroSnaker", [WIDTH, HEIGHT])

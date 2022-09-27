@@ -7,7 +7,7 @@ use crate::bean::*;
 use crate::config::*;
 use crate::direction::*;
 use crate::player::*;
-use crate::render_engine::*;
+use crate::render::*;
 use crate::snaker::*;
 
 pub struct GameState {
@@ -34,13 +34,12 @@ impl GameState {
     }
 
     pub fn clear(&mut self, render_engine: &mut RenderEngine, args: &RenderArgs) {
-        render_engine.engine.draw(args.viewport(), |_c, gl| {
-            graphics::clear(GREEN, gl);
-        });
+        render_engine.clear(args);
     }
 
     pub fn render(&mut self, render_engine: &mut RenderEngine, args: &RenderArgs) {
         self.clear(render_engine, args);
+
         self.snake.render(render_engine, args);
         self.bean.render(render_engine, args);
     }
@@ -60,7 +59,7 @@ impl GameState {
         if self.just_eaten {
             use rand::thread_rng;
             use rand::Rng;
-            // try my luck
+
             let mut r = thread_rng();
             loop {
                 let new_x = r.gen_range(0, self.cols);

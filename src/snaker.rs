@@ -3,7 +3,7 @@ use std::collections::LinkedList;
 
 use crate::config::*;
 use crate::direction::*;
-use crate::render_engine::*;
+use crate::render::*;
 
 pub struct Snake {
     pub snake_parts: LinkedList<SnakePiece>,
@@ -24,19 +24,7 @@ impl Snake {
     }
 
     pub fn render(&mut self, render_engine: &mut RenderEngine, args: &RenderArgs) {
-        render_engine.engine.draw(args.viewport(), |c, gl| {
-            let transform = c.transform;
-            let squares: Vec<graphics::types::Rectangle> = self
-                .snake_parts
-                .iter()
-                .map(|p| SnakePiece(p.0 * self.width, p.1 * self.width))
-                .map(|p| graphics::rectangle::square(p.0 as f64, p.1 as f64, self.width as f64))
-                .collect();
-
-            squares
-                .into_iter()
-                .for_each(|square| graphics::rectangle(RED, square, transform, gl));
-        })
+        render_engine.draw_snaker(&self.snake_parts, self.width, args);
     }
 
     pub fn update(&mut self, just_eaten: bool, cols: u32, rows: u32) -> bool {
