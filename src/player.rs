@@ -3,7 +3,7 @@ pub struct Player {
     pub scores: u32,
 }
 impl Player {
-    pub fn update(&mut self, score: u32) {
+    pub fn add_score(&mut self, score: u32) {
         self.scores += score;
     }
 }
