@@ -58,6 +58,7 @@ impl GameState {
         }
 
         if !self.snake.update(self.just_eaten, self.cols, self.rows) {
+            println!("Game Over!");
             return false;
         }
 

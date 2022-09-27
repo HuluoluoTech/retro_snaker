@@ -1,9 +1,14 @@
 # Retro Snaker
 
-WIP
-
----
-
 ## Features
-* piston engine: https://docs.rs/piston/0.53.1/piston/
-* easy 
+* 2D Retro Snaker
+* piston engine
+* Game World
+* Update
+* Render
+* Capture Input Keys
+* Bean
+* Snaker
+* Hud
+* Collision Detection
+* Game Over Conditions
