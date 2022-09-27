@@ -49,6 +49,7 @@ impl Snake {
             Direction::RIGHT => new_front.0 += 1,
         }
 
+        // pop item cloned before
         if !just_eaten {
             self.snake_parts.pop_back();
         }

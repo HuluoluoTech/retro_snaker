@@ -15,6 +15,7 @@ impl Bean {
 
     pub fn new_random(x: u32, y: u32) -> Bean {
 
+
         Bean { x, y}
 
     }

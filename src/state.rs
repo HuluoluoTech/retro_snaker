@@ -9,6 +9,8 @@ use crate::player::*;
 use crate::render::*;
 use crate::snaker::*;
 use crate::collision;
+use rand::thread_rng;
+use rand::Rng;
 
 pub struct GameState {
     pub rows: u32,
@@ -47,18 +49,7 @@ impl GameState {
     pub fn update(&mut self, _args: &UpdateArgs) -> bool {
         self.just_eaten = collision::can_eat_bean(&self.snake, &self.bean);
         if self.just_eaten {
-            use rand::thread_rng;
-            use rand::Rng;
-
-            let mut r = thread_rng();
-            loop {
-                let new_x = r.gen_range(0, self.cols);
-                let new_y = r.gen_range(0, self.rows);
-                if !collision::is_snaker_self_colli(&self.snake, new_x, new_y) {
-                    self.bean = Bean { x: new_x, y: new_y };
-                    break;
-                }
-            }
+            self.new_random_bean();
         }
 
         if !self.snake.update(self.just_eaten, self.cols, self.rows) {
@@ -102,6 +93,18 @@ impl GameState {
     
             if let Some(r) = e.render_args() {
                 self.render(&mut render_engine, &r);
+            }
+        }
+    }
+
+    fn new_random_bean(&mut self) {
+        let mut r = thread_rng();
+        loop {
+            let new_x = r.gen_range(0, COLS);
+            let new_y = r.gen_range(0, ROWS);
+            if !collision::is_snaker_self_colli(&self.snake, new_x, new_y) {
+                self.bean = Bean { x: new_x, y: new_y };
+                break;
             }
         }
     }
