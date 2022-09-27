@@ -4,6 +4,7 @@ use std::collections::LinkedList;
 use crate::config::*;
 use crate::direction::*;
 use crate::render::*;
+use crate::collision;
 
 pub struct Snake {
     pub snake_parts: LinkedList<SnakePiece>,
@@ -53,16 +54,12 @@ impl Snake {
         }
 
         // Checks self collision.
-        if self.is_collide(new_front.0, new_front.1) {
+        if collision::is_snaker_self_colli(&self, new_front.0, new_front.1) {
             return false;
         }
 
         self.snake_parts.push_front(new_front);
-        
-        true
-    }
 
-    pub fn is_collide(&self, x: u32, y: u32) -> bool {
-        self.snake_parts.iter().any(|p| x == p.0 && y == p.1)
+        true
     }
 }

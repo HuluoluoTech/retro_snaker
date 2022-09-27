@@ -9,3 +9,7 @@ pub fn can_eat_bean(snake: &Snake, bean: &Bean) -> bool {
         false
     }
 }
+
+pub fn is_snaker_self_colli(snake: &Snake, x: u32, y: u32) -> bool {
+    snake.snake_parts.iter().any(|p| x == p.0 && y == p.1)
+}

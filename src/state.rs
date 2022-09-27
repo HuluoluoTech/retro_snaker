@@ -54,7 +54,7 @@ impl GameState {
             loop {
                 let new_x = r.gen_range(0, self.cols);
                 let new_y = r.gen_range(0, self.rows);
-                if !self.snake.is_collide(new_x, new_y) {
+                if !collision::is_snaker_self_colli(&self.snake, new_x, new_y) {
                     self.bean = Bean { x: new_x, y: new_y };
                     break;
                 }
