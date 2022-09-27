@@ -4,6 +4,7 @@ use piston::input::RenderArgs;
 use crate::config::*;
 use crate::snaker::*;
 use std::collections::LinkedList;
+use crate::hud::*;
 
 trait Render {
     type Engine;
@@ -49,6 +50,16 @@ impl RenderEngine {
             squares
                 .into_iter()
                 .for_each(|square| graphics::rectangle(RED, square, transform, gl));
+        });
+    }
+
+    pub fn draw_hud(&mut self, hud: &Hud, args: &RenderArgs) {
+        self.engine.draw(args.viewport(), |c, gl| {
+            let transform = c.transform;
+
+            let square = graphics::rectangle::square(hud.x as f64, hud.y as f64, hud.width as f64);
+
+            graphics::rectangle(RED, square, transform, gl)
         });
     }
 }

@@ -11,6 +11,7 @@ use crate::snaker::*;
 use crate::collision;
 use rand::thread_rng;
 use rand::Rng;
+use crate::hud::*;
 
 pub struct GameState {
     pub rows: u32,
@@ -20,6 +21,7 @@ pub struct GameState {
     pub bean: Bean,
     pub snake: Snake,
     pub default_player: Player,
+    pub hud: Hud,
 }
 
 impl GameState {
@@ -32,6 +34,7 @@ impl GameState {
             bean: Bean::new(),
             snake: Snake::new(),
             default_player: Player::default(),
+            hud: Hud::new(),
         }
     }
 
@@ -44,6 +47,8 @@ impl GameState {
 
         self.snake.render(render_engine, args);
         self.bean.render(render_engine, args);
+
+        self.hud.render(render_engine, args);
     }
 
     pub fn update(&mut self, _args: &UpdateArgs) -> bool {
@@ -60,6 +65,8 @@ impl GameState {
             self.default_player.add_score(1);
             self.just_eaten = false;
         }
+
+        self.hud.update(self.default_player.scores);
 
         true
     }
